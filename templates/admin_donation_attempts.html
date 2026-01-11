@@ -20,12 +20,12 @@
     {% if attempts %}
         {% for a in attempts %}
             <tr>
-                <td>{{ a[0] }}</td>   <!-- email -->
-                <td>{{ a[1] }}</td>   <!-- campaign -->
-                <td>₹ {{ a[2] }}</td> <!-- amount -->
-                <td>{{ a[3] }}</td>   <!-- status -->
+                <td>{{ a[0] }}</td>   
+                <td>{{ a[1] }}</td>   
+                <td>₹ {{ a[2] }}</td> 
+                <td>{{ a[3] }}</td>   
                 
-                <td>{{ a[5] }}</td>   <!-- time -->
+                <td>{{ a[5] }}</td>   
             </tr>
         {% endfor %}
     {% else %}
