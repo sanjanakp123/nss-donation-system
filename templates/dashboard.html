@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>User Dashboard</title>
+</head>
+<body>
+
+
+    
+
+    <h2>User Dashboard</h2>
+    {% if request.args.get('otp') == 'wrong' %}
+    <p style="color:red;">Payment failed due to wrong OTP. Please retry.</p>
+    {% endif %}
+
+
+
+    <!-- SECTION 1: Registration Details -->
+    <h3>My Details</h3>
+    <p><b>Email:</b> {{ email }}</p>
+    <p><b>Name:</b> {{ details[0] }}</p>
+    <p><b>Phone:</b> {{ details[1] }}</p>
+
+    <hr>
+
+    <!-- SECTION 2: Donation History -->
+    <h3>Donation History (Successful)</h3>
+
+{% if donations %}
+<table border="1">
+    <tr>
+        <th>Campaign</th>
+        <th>Amount</th>
+        <th>Date</th>
+        <th>Receipt</th>
+    </tr>
+    {% for d in donations %}
+    <tr>
+        <td>{{ d[0] }}</td>      <!-- campaign name -->
+        <td>{{ d[1] }}</td>   <!-- amount -->
+        <td>{{ d[2] }}</td>     <!-- date -->
+        <td>
+           <a href="/receipt/download/{{ d[3] }}">Export Receipt</a>
+
+        </td>
+    </tr>
+    {% endfor %}
+</table>
+{% else %}
+<p>No successful donations yet.</p>
+{% endif %}
+
+    <hr>
+
+<!-- SECTION: Incomplete / Failed Payment -->
+ {% if request.args.get('error') == 'wrong_otp' %}
+    <p style="color:red; font-weight:bold;">
+        ❌ Wrong OTP. Please try again.
+    </p>
+    {% endif %}
+{% if retry %}
+<h3 style="color:red;">Incomplete Payment</h3>
+
+<p>
+    <b>Campaign:</b> {{ retry[1] }} <br>
+    <b>Attempts:</b> {{ retry[2]|int-1 }}
+</p>
+
+<a href="/payment/{{ retry[0] }}">
+    <button>Continue Payment</button>
+</a>
+
+<a href="/dismiss/{{ retry[0] }}">
+    <button>Dismiss</button>
+</a>
+{% endif %}
+
+
+    <hr>
+
+    <!-- SECTION 3: Donate -->
+    <h3>Support a Campaign</h3>
+    <a href="/donate">Donate to a Campaign</a>
+
+    <br><br>
+    <a href="/logout">Logout</a>
+</body>
+</html>

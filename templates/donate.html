@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Donate to a Campaign</title>
+</head>
+<body>
+
+<h2>Donate to a Campaign</h2>
+
+<form method="POST">
+
+    <label><b>Select Campaign:</b></label><br><br>
+    <select name="campaign_id" required>
+        <option value="">-- Select a Campaign --</option>
+        {% for c in campaigns %}
+            <option value="{{ c[0] }}">{{ c[1] }}</option>
+        {% endfor %}
+    </select>
+
+    <br><br>
+
+    <label><b>Amount (₹):</b></label><br><br>
+    <input type="number" name="amount" min="1" required>
+
+    <br><br>
+
+    <button type="submit">Donate</button>
+
+</form>
+
+<br>
+<a href="/dashboard">← Back to Dashboard</a>
+
+</body>
+</html>

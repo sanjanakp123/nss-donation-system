@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<body>
+<h2>Processing Payment</h2>
+
+<form method="POST" action="/payment/result">
+    <input type="hidden" name="donation_id" value="{{ donation_id }}">
+    <button type="submit">Verify & Pay</button>
+</form>
+
+<form method="POST" action="/payment/fail">
+    <input type="hidden" name="donation_id" value="{{ donation_id }}">
+    <button type="submit">Simulate Failure</button>
+</form>
+
+<form method="POST" action="/payment/cancel">
+    <input type="hidden" name="donation_id" value="{{ donation_id }}">
+    <button type="submit">Cancel Payment</button>
+</form>
+
+
+
+</body>
+</html>

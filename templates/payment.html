@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>NSS Payment Gateway (Sandbox)</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+        .box {
+            border: 1px solid #999;
+            padding: 20px;
+            width: 500px;
+        }
+        button {
+            margin-top: 10px;
+            padding: 6px 12px;
+        }
+    </style>
+</head>
+<body>
+
+<h2>NSS Payment Gateway (Sandbox)</h2>
+
+<p><b>Campaign:</b> {{ campaign }}</p>
+<p><b>Amount:</b> ₹{{ amount }}</p>
+<p><b>Attempt No:</b> {{ attempt }}</p>
+
+<hr>
+
+<div class="box">
+
+    <!-- ================= PAYMENT METHOD ================= -->
+    {% if not method %}
+<h3>Select Payment Method</h3>
+
+<form method="POST" action="/payment/process">
+    <input type="hidden" name="donation_id" value="{{ donation_id }}">
+
+    <input type="radio" name="method" value="UPI" onclick="showUPI()" required> UPI<br>
+    <input type="radio" name="method" value="CARD" onclick="showCard()"> Card<br>
+    <input type="radio" name="method" value="NETBANKING" onclick="showBank()"> Net Banking<br><br>
+
+    <!-- UPI -->
+    <div id="upi" style="display:none;">
+        <input type="text" placeholder="Enter UPI ID (sandbox)">
+    </div>
+
+    <!-- CARD -->
+    <div id="card" style="display:none;">
+        <input type="text" placeholder="Card Number"><br>
+        <input type="text" placeholder="MM/YY"><br>
+        <input type="text" placeholder="CVV">
+    </div>
+
+    <!-- NETBANKING -->
+    <div id="bank" style="display:none;">
+        <select>
+            
+            <option>SBI</option>
+            <option>HDFC</option>
+            <option>ICICI</option>
+            <option>PNB</option>
+        </select>
+    </div>
+
+    <br>
+    <button type="submit">Proceed to Pay</button>
+</form>
+
+<script>
+function showUPI() {
+    upi.style.display = "block";
+    card.style.display = "none";
+    bank.style.display = "none";
+}
+function showCard() {
+    upi.style.display = "none";
+    card.style.display = "block";
+    bank.style.display = "none";
+}
+function showBank() {
+    upi.style.display = "none";
+    card.style.display = "none";
+    bank.style.display = "block";
+}
+</script>
+
+{% endif %}
+
+
+    <!-- ================= OTP SECTION ================= -->
+    {% if method %}
+    <h3>OTP Verification</h3>
+    <p>OTP sent to registered mobile (Sandbox)</p>
+
+    {% if otp %}
+    <p style="color:red; font-weight:bold;">
+      Sandbox OTP: {{ otp }}
+    </p>
+    {% endif %}
+
+    <form method="POST" action="/payment/otp/verify">
+        <input type="hidden" name="donation_id" value="{{ donation_id }}">
+        <input type="text" name="otp" placeholder="Enter OTP" required>
+        <br><br>
+        <button type="submit">Verify & Pay</button>
+    </form>
+
+    <br>
+
+    <form method="POST" action="/payment/cancel" style="display:inline;">
+        <input type="hidden" name="donation_id" value="{{ donation_id }}">
+        <button type="submit">Simulate Failure</button>
+    </form>
+
+    <form method="POST" action="/payment/cancel">
+    <input type="hidden" name="donation_id" value="{{ donation_id }}">
+    <button type="submit">Cancel Payment</button>
+</form>
+
+    {% endif %}
+
+</div>
+
+<p style="color:gray; margin-top:20px;">
+⚠ Sandbox environment — no real money involved
+</p>
+
+</body>
+</html>

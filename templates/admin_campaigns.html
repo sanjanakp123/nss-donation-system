@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Manage Campaigns</title>
+</head>
+<body>
+
+<h2>Add New Campaign</h2>
+
+<form method="POST">
+    <label>Campaign Name:</label><br>
+    <input type="text" name="name" required><br><br>
+
+    <label>Description:</label><br>
+    <textarea name="description"></textarea><br><br>
+
+    <button type="submit">Add Campaign</button>
+</form>
+
+<hr>
+
+<h3>Existing Campaigns</h3>
+
+<table border="1" cellpadding="8">
+    <tr>
+        <th>ID</th>
+        <th>Name</th>
+        <th>Description</th>
+        <th>Total Collected (₹)</th>
+        <th>Status</th>
+
+    </tr>
+
+    {% for c in campaigns %}
+    <tr>
+        <td>{{ c[0] }}</td>
+        <td>{{ c[1] }}</td>
+        <td>{{ c[2] }}</td>
+        <td>₹ {{ c[4] }}</td>
+        <td>
+            {% if c[3] == 1 %} Active {% else %} Inactive {% endif %}
+        </td>
+    </tr>
+    {% endfor %}
+</table>
+
+<br>
+<a href="/admin/dashboard">← Back to Admin Dashboard</a>
+
+</body>
+</html>

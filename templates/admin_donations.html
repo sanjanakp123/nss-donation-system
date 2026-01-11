@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Donation History</title>
+</head>
+<body>
+
+<h2>Donation History</h2>
+
+<table border="1" cellpadding="8" width="100%" style="border-collapse:collapse;">
+    <tr style="background:#f2f2f2;">
+        <th>Donor Email</th>
+        <th>Campaign</th>
+        <th>Amount</th>
+        <th>Date & Time</th>
+        <th>Receipt</th>
+    </tr>
+
+    {% if donations %}
+        {% for d in donations %}
+            <tr>
+                <td>{{ d[0] }}</td>   <!-- email -->
+<td>{{ d[1] }}</td>   <!-- campaign -->
+<td>₹ {{ d[2] }}</td> <!-- amount -->
+<td>{{ d[3] }}</td>   <!-- date -->
+<td>
+    <a href="/admin/receipt/{{ d[4] }}">Export Receipt</a>
+</td>
+
+            </tr>
+        {% endfor %}
+    {% else %}
+        <tr>
+            <td colspan="5" align="center">No donations yet</td>
+        </tr>
+    {% endif %}
+</table>
+
+<br>
+<a href="/admin/dashboard">← Back to Admin Dashboard</a>
+
+</body>
+</html>

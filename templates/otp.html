@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+<body>
+<h2>Enter OTP</h2>
+<p style="color:red; font-weight:bold;">
+    Sandbox OTP: {{ otp }}
+</p>
+<p>DEBUG OTP VAR = {{ otp }}</p>
+
+<form method="POST" action="/payment/otp/verify">
+  <input type="hidden" name="donation_id" value="{{ donation_id }}">
+  <input name="otp" required>
+  <button>Verify OTP</button>
+</form>
+
+
+</body>
+</html>

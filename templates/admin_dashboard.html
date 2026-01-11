@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Admin Dashboard</title>
+</head>
+<body>
+
+<h2>Admin Dashboard</h2>
+
+<hr>
+
+<h3>Overview</h3>
+
+<p>
+    <b>Total Registered Users:</b> {{ total_users }}
+</p>
+
+<p>
+    <b>Total Amount Donated:</b> ₹{{ total_amount }}
+</p>
+
+<hr>
+
+<h3>Admin Actions</h3>
+
+<a href="/admin/users">
+    <button>View Registered Users</button>
+</a>
+<br><br>
+<a href="/admin/donations">
+    <button>View Successful Donations</button>
+</a>
+<br><br>
+<a href="/admin/donation-attempts">
+    <button>View All Donation Attempts</button>
+</a>
+<br><br>
+<a href="/admin/campaigns"><button>Add / Manage Campaigns</button></a>
+
+<br><br>
+<a href="/logout">Logout</a>
+
+
+</body>
+</html>

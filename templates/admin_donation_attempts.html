@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>All Donation Attempts</title>
+</head>
+<body>
+
+<h2>All Donation Attempts (Monitoring Only)</h2>
+
+<table border="1" cellpadding="8" width="100%" style="border-collapse:collapse;">
+    <tr style="background:#f2f2f2;">
+        <th>Donor Email</th>
+        <th>Campaign</th>
+        <th>Amount</th>
+        <th>Status</th>
+        
+        <th>Date & Time</th>
+    </tr>
+
+    {% if attempts %}
+        {% for a in attempts %}
+            <tr>
+                <td>{{ a[0] }}</td>   <!-- email -->
+                <td>{{ a[1] }}</td>   <!-- campaign -->
+                <td>₹ {{ a[2] }}</td> <!-- amount -->
+                <td>{{ a[3] }}</td>   <!-- status -->
+                
+                <td>{{ a[5] }}</td>   <!-- time -->
+            </tr>
+        {% endfor %}
+    {% else %}
+        <tr>
+            <td colspan="6" align="center">No donation attempts found</td>
+        </tr>
+    {% endif %}
+</table>
+
+<br>
+<a href="/admin/dashboard">← Back to Admin Dashboard</a>
+
+</body>
+</html>

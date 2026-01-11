@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Registered Users</title>
+</head>
+<body>
+
+<h2>Registered Users</h2>
+
+<!-- FILTER FORM -->
+<form method="get" action="/admin/users">
+
+    <label><b>Filter users:</b></label>
+
+    <select name="sort" id="sortSelect" onchange="clearSearch()">
+        <option value="">Default</option>
+        <option value="top_donors"
+            {% if request.args.get('sort') == 'top_donors' %}selected{% endif %}>
+            Top Donors
+        </option>
+        <option value="most_active"
+            {% if request.args.get('sort') == 'most_active' %}selected{% endif %}>
+            Most Active Donors
+        </option>
+        <option value="recently_donated"
+            {% if request.args.get('sort') == 'recently_donated' %}selected{% endif %}>
+            Recently Donated
+        </option>
+        <option value="newest_accounts"
+            {% if request.args.get('sort') == 'newest_accounts' %}selected{% endif %}>
+            Newest Accounts
+        </option>
+    </select>
+
+    <input type="text"
+           name="q"
+           id="searchInput"
+           placeholder="Search name/email"
+           value="{{ request.args.get('q','') }}"
+           oninput="clearSort()">
+
+    <button type="submit">Apply</button>
+</form>
+<script>
+function clearSearch() {
+    document.getElementById("searchInput").value = "";
+}
+
+function clearSort() {
+    document.getElementById("sortSelect").value = "";
+}
+</script>
+
+
+
+<hr>
+
+{% if users %}
+    {% for u in users %}
+        <p><b>Email:</b> {{ u[1] }}</p>
+        <p><b>Phone:</b> {{ u[3] if u[3] else '—' }}</p>
+        <p><b>No. of Donations:</b> {{ u[4] }}</p>
+        <p><b>Total Donated:</b> ₹ {{ u[5] }}</p>
+
+        <a href="/admin/export/user/text/{{ u[0] }}">
+            <button>Export User Details</button>
+        </a>
+
+        <a href="/admin/user/{{ u[0] }}/donations">
+            <button>View Donation History</button>
+        </a>
+
+        <hr>
+    {% endfor %}
+{% else %}
+    <p>No users found.</p>
+{% endif %}
+
+<a href="/admin/dashboard">Back to Admin Dashboard</a>
+
+</body>
+</html>

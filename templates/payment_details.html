@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Enter Payment Details</title>
+</head>
+<body>
+
+<h2>Enter {{ method }} Details (Sandbox)</h2>
+
+<form method="POST" action="/payment/result">
+
+    <input type="hidden" name="donation_id" value="{{ donation_id }}">
+    <input type="hidden" name="result" value="success">
+
+    <!-- 🔴 THESE TWO ARE MANDATORY -->
+    <input type="hidden" name="method" value="{{ method }}">
+    <input type="hidden" name="payment_ref" value="SBX{{ donation_id }}-{{ attempt }}">
+
+    <button type="submit">Confirm Payment</button>
+</form>
+
+
+</body>
+</html>
