@@ -19,10 +19,10 @@
     {% if donations %}
         {% for d in donations %}
             <tr>
-                <td>{{ d[0] }}</td>   <!-- email -->
-<td>{{ d[1] }}</td>   <!-- campaign -->
-<td>₹ {{ d[2] }}</td> <!-- amount -->
-<td>{{ d[3] }}</td>   <!-- date -->
+                <td>{{ d[0] }}</td>  
+<td>{{ d[1] }}</td>   
+<td>₹ {{ d[2] }}</td> 
+<td>{{ d[3] }}</td>   
 <td>
     <a href="/admin/receipt/{{ d[4] }}">Export Receipt</a>
 </td>

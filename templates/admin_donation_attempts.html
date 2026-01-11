@@ -6,7 +6,6 @@
 <body>
 
 <h2>All Donation Attempts (Monitoring Only)</h2>
-
 <table border="1" cellpadding="8" width="100%" style="border-collapse:collapse;">
     <tr style="background:#f2f2f2;">
         <th>Donor Email</th>
@@ -20,12 +19,12 @@
     {% if attempts %}
         {% for a in attempts %}
             <tr>
-                <td>{{ a[0] }}</td>   <!-- email -->
-                <td>{{ a[1] }}</td>   <!-- campaign -->
-                <td>₹ {{ a[2] }}</td> <!-- amount -->
-                <td>{{ a[3] }}</td>   <!-- status -->
+                <td>{{ a[0] }}</td>   
+                <td>{{ a[1] }}</td>   
+                <td>₹ {{ a[2] }}</td> 
+                <td>{{ a[3] }}</td>   
                 
-                <td>{{ a[5] }}</td>   <!-- time -->
+                <td>{{ a[5] }}</td>   
             </tr>
         {% endfor %}
     {% else %}
