@@ -3,7 +3,7 @@ import sqlite3
 import csv
 from flask import Response
 from collections import defaultdict
-
+from werkzeug.security import check_password_hash
 from datetime import datetime
 import os
 
@@ -133,25 +133,25 @@ def login():
 
         db = get_db()
         user = db.execute(
-            "SELECT id, role FROM users WHERE email=? AND password=?",
-            (email, password)
+            "SELECT id, password, role FROM users WHERE email=?",
+            (email,)
         ).fetchone()
         db.close()
 
-        if not user:
+        if not user or not check_password_hash(user[1], password):
             return "Invalid credentials"
 
         session.clear()
         session["user_id"] = user[0]
-        session["role"] = user[1]
+        session["role"] = user[2]
 
-        
-        if user[1] == "admin":
+        if user[2] == "admin":
             return redirect("/admin/dashboard")
         else:
             return redirect("/dashboard")
 
     return render_template("login.html")
+
 
 @app.route("/logout")
 def logout():

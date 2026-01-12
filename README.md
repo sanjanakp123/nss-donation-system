@@ -60,3 +60,6 @@ python app.py
 http://127.0.0.1:5000/
 
 The SQLite database is created automatically on first run.
+
+#Admin Setup:
+Admin accounts are created manually during deployment and are not exposed through the application interface for security reasons.
