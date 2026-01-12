@@ -4,6 +4,7 @@ import csv
 from flask import Response
 from collections import defaultdict
 from werkzeug.security import check_password_hash
+from werkzeug.security import generate_password_hash
 from datetime import datetime
 import os
 
@@ -97,9 +98,13 @@ def register():
         db = get_db()
         try:
             db.execute(
-                "INSERT INTO users (email, password, role) VALUES (?, ?, ?)",
-                (request.form["email"], request.form["password"], "user")
-            )
+    "INSERT INTO users (email, password, role) VALUES (?, ?, ?)",
+    (
+        request.form["email"],
+        generate_password_hash(request.form["password"]),
+        "user"
+    )
+)
             db.commit()
         except sqlite3.IntegrityError:
             return render_template("register.html", error="Email already registered")
@@ -107,6 +112,7 @@ def register():
             db.close()
         return redirect("/details")
     return render_template("register.html")
+
 
 @app.route("/details", methods=["GET", "POST"])
 def details():
