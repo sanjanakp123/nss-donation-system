@@ -65,5 +65,31 @@ http://127.0.0.1:5000/
 
 The SQLite database is created automatically on first run.
 
-#Admin Setup:
-Admin accounts are created manually during deployment and are not exposed through the application interface for security reasons.
+#Admin Setup 
+
+After running the project for the first time, all users are created with role = "user".
+
+To create an admin account:
+
+1. Register a normal user through the website.
+2. Open terminal in the project folder and run:
+
+   python
+
+3. Then execute:
+
+   import sqlite3
+   db = sqlite3.connect("donations.db")
+   cur = db.cursor()
+
+   cur.execute("""
+   UPDATE users
+   SET role = 'admin'
+   WHERE email = 'your_email_here'
+   """)
+
+   db.commit()
+   db.close()
+
+4. Login again with that email.
+   You will now be redirected to the admin dashboard.
