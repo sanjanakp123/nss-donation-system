@@ -14,8 +14,12 @@ while providing administrators with complete monitoring and reporting tools.
 - OTP-based sandbox payment verification
 - View successful donation history
 - Download donation receipt
-- Retry failed donations
-- Cancel ongoing donation attempts
+- Retry Failed Donations & Cancel Ongoing Attempts::
+The system displays only the most recent donation attempt.
+If a donation fails or is cancelled, its status is shown to the user.
+When the user starts a new donation, any previous failed or cancelled attempt is automatically reset.
+If the new attempt also fails or is cancelled, it replaces the previous one on the screen.
+At no time will more than one failed or cancelled attempt be visible.
 
 #  Admin Features
 - Admin login with role-based access
